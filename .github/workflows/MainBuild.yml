@@ -1,0 +1,102 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [Main]
+
+jobs:
+
+  build:
+
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+      matrix:
+        configuration: [Release]
+
+    runs-on: ubuntu-latest 
+
+    env:
+      Solution_Name: ChilloutModManager\ChillManager.sln
+      Test_Project_Path: ChilloutModManager\ChillPatcherTests\ChillPatcherTests.csproj
+      Squad__DiscordToken: ${{ secrets.DISCORD_TOKEN }}
+      
+    steps:
+
+    - name: Get Build Version
+      run: DAY=$(date +%j);MONTH=$(date +%m);EPOC=$(( $(date "+10#%H * 60 + 10#%M") ));echo "VERSION=$(echo "1.$MONTH.$DAY.$EPOC")" >> $GITHUB_ENV
+          
+    - name: Update Discord - Start
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        nodetail: true
+        title: "Started pipeline build ${{ env.VERSION }}"
+        color: 0x4CA5FF
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Update Discord - Checkout
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        nodetail: true
+        title: "Branch Checkout Success"
+        color: 0x4CA5FF
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+
+    # Restore dependencies from Nuget
+    - name: Restore Nuget Packages
+      run: dotnet restore ChillManager
+
+    - name: Update Discord - Restored
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        nodetail: true
+        title: "Nuget Restored!"
+        color: 0x4CA5FF
+
+
+    # Execute all unit tests in the solution
+    - name: Execute unit tests
+      run: dotnet test ChillManager
+
+    - name: Update Discord - Tests
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        nodetail: true
+        title: "All Unit Tests Pass!"
+        color: 0x4CA5FF
+
+    # Create the app package by building and packaging the Windows Application Packaging project
+    - name: Create the app package
+      run: dotnet build CU.SquadBot -o ApplicationAtrifacts -p:Version=$VERSION
+      env:
+        Appx_Bundle: Always
+        Appx_Bundle_Platforms: x86|x64
+        Appx_Package_Build_Mode: StoreUpload
+        Configuration: ${{ matrix.configuration }}
+
+    - name: Update Discord - Complete
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
