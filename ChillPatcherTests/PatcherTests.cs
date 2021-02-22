@@ -25,8 +25,6 @@ namespace ChillPatcherTests {
 
         [TestMethod]
         public void TestPatchAssembly() {
-
-
             var testAssembly = AssemblyDefinition.CreateAssembly(
                 new AssemblyNameDefinition(
                     FILE_NAME,
