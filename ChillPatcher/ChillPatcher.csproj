@@ -77,5 +77,11 @@
   <ItemGroup>
     <Content Include="Resources\CommandHelpfile.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChillPatch\ChillPatch.csproj">
+      <Project>{da7d0c73-7eb0-49d4-863f-6f40379079bc}</Project>
+      <Name>ChillPatch</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

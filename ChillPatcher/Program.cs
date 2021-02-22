@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+using Mono.Cecil;
+
 namespace ChillPatcher {
     class Program {
         static void Main(string[] args) {
@@ -40,7 +42,7 @@ namespace ChillPatcher {
                 return;
             }
 
-
+            Patcher.PatchAssembly(args[0]);
         }
 
         public static void UnPatch(string[] args) {

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using UnityEngine;
+
 namespace ChillPatch {
-    public class Loader {
+    public class ChilloutPatch : MonoBehaviour {
 
     }
 }
