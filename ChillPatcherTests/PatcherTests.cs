@@ -49,9 +49,6 @@ namespace ChillPatcherTests {
 
         [TestMethod]
         public void TestUnpatchAssembly() {
-            var FILE_NAME = "PatchTest";
-            var FILE_EXT = "dll";
-
             var testAssembly = AssemblyDefinition.CreateAssembly(
                 new AssemblyNameDefinition(
                     FILE_NAME,
