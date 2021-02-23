@@ -1,6 +1,4 @@
-﻿using ChillPatch;
-
-using ChillPatcher;
+﻿using ChillPatcher;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
