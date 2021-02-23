@@ -30,19 +30,20 @@ namespace ChillPatcherTests {
                     FILE_NAME,
                     ModuleKind.Dll);
 
-            testAssembly.Write($"{FILE_NAME}.{FILE_EXT}");
-            Assert.IsTrue(File.Exists($"{FILE_NAME}.{FILE_EXT}"));
+            var fileName = $"{FILE_NAME}.{FILE_EXT}";
+            testAssembly.Write(fileName);
+            Assert.IsTrue(File.Exists(fileName));
             Assert.IsTrue(testAssembly.MainModule.Types.All(i => i.Name != nameof(ChilloutPatch)));
 
             testAssembly.Dispose();
-            Patcher.PatchAssembly($"{FILE_NAME}.{FILE_EXT}");
+            Patcher.PatchAssembly(fileName);
 
-            testAssembly = AssemblyDefinition.ReadAssembly($"{FILE_NAME}.{FILE_EXT}");
+            testAssembly = AssemblyDefinition.ReadAssembly(fileName);
             Assert.IsFalse(testAssembly.MainModule.Types.All(i => i.Name != nameof(ChilloutPatch)));
             testAssembly.Dispose();
 
-            File.Delete($"{FILE_NAME}.{FILE_EXT}");
-            Assert.IsFalse(File.Exists($"{FILE_NAME}.{FILE_EXT}"));
+            File.Delete(fileName);
+            Assert.IsFalse(File.Exists(fileName));
         }
 
         [TestMethod]
@@ -54,23 +55,24 @@ namespace ChillPatcherTests {
                     FILE_NAME,
                     ModuleKind.Dll);
 
-            testAssembly.Write($"{FILE_NAME}.{FILE_EXT}");
+            var fileName = $"{FILE_NAME}.{FILE_EXT}";
+            testAssembly.Write(fileName);
             testAssembly.Dispose();
 
-            Assert.IsTrue(File.Exists($"{FILE_NAME}.{FILE_EXT}"));
-            Patcher.PatchAssembly($"{FILE_NAME}.{FILE_EXT}");
+            Assert.IsTrue(File.Exists(fileName));
+            Patcher.PatchAssembly(fileName);
 
-            testAssembly = AssemblyDefinition.ReadAssembly($"{FILE_NAME}.{FILE_EXT}");
+            testAssembly = AssemblyDefinition.ReadAssembly(fileName);
             Assert.IsFalse(testAssembly.MainModule.Types.All(i => i.Name != nameof(ChilloutPatch)));
             testAssembly.Dispose();
 
-            Patcher.UnPatchAssembly($"{FILE_NAME}.{FILE_EXT}");
-            testAssembly = AssemblyDefinition.ReadAssembly($"{FILE_NAME}.{FILE_EXT}");
+            Patcher.UnPatchAssembly(fileName);
+            testAssembly = AssemblyDefinition.ReadAssembly(fileName);
             Assert.IsTrue(testAssembly.MainModule.Types.All(i => i.Name != nameof(ChilloutPatch)));
             testAssembly.Dispose();
 
-            File.Delete($"{FILE_NAME}.{FILE_EXT}");
-            Assert.IsFalse(File.Exists($"{FILE_NAME}.{FILE_EXT}"));
+            File.Delete(fileName);
+            Assert.IsFalse(File.Exists(fileName));
         }
     }
 }

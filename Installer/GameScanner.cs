@@ -85,10 +85,7 @@ namespace Installer {
                 return Task.CompletedTask;
             }
 
-            Console.Write($"{new string(' ', Console.BufferWidth)}");
-            Console.CursorLeft = 0;
-            Console.Write($"Scanning: {scanDirectory}...");
-
+            Console.WriteLine($"Scanning: {new DirectoryInfo(scanDirectory).Name}...");
             return Task.CompletedTask;
         }
 
