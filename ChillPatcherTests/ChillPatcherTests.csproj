@@ -72,10 +72,6 @@
       <Project>{07318c97-9820-41c5-b641-fdb9a69bcc36}</Project>
       <Name>ChillPatcher</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChillPatch\ChillPatch.csproj">
-      <Project>{da7d0c73-7eb0-49d4-863f-6f40379079bc}</Project>
-      <Name>ChillPatch</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

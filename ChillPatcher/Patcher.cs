@@ -5,8 +5,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-using ChillPatch;
-
 using Mono.Cecil;
 
 using TypeAttributes = Mono.Cecil.TypeAttributes;

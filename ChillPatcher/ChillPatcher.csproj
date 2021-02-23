@@ -53,8 +53,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>F:\SteamLibrary\steamapps\common\ChilloutVR\ChilloutVR_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChilloutPatch.cs" />
     <Compile Include="Patcher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,9 +83,9 @@
     <Content Include="Resources\CommandHelpfile.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChillPatch\ChillPatch.csproj">
-      <Project>{da7d0c73-7eb0-49d4-863f-6f40379079bc}</Project>
-      <Name>ChillPatch</Name>
+    <ProjectReference Include="..\ChillModsHandler\ChillModsHandler.csproj">
+      <Project>{5181369c-a99b-456d-b0ad-615716f9f2e1}</Project>
+      <Name>ChillModsHandler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

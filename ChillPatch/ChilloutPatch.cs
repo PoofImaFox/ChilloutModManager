@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ChillPatch {
-    public class ChilloutPatch : MonoBehaviour {
 
-    }
 }
